@@ -1,0 +1,74 @@
+import re
+
+data = input()
+
+
+def trans(s):
+    l_data = list()
+    for i in re.findall('\d+|-\d+', s):
+        l_data.append(int(i))
+    return l_data
+
+
+l_da = trans(data)
+n = l_da[0]
+m = l_da[1]
+int_s = 1
+l_sj = list()
+for i in range(n):
+    l_n = list()
+    for j in range(m):
+        l_n.append(0)
+    l_sj.append(l_n)
+
+
+def show(l_sj):
+    for i in l_sj:
+        print(i)
+
+
+for i in range(int(min(m / 2, n / 2)) + 1):
+    # show(l_sj)
+    # print("----------------------------------")
+    j = m - i
+    k = i
+    if k == j:
+        break
+    while k < j:
+        l_sj[i][k] = int_s
+        int_s += 1
+        k += 1
+    # show(l_sj)
+    # print("----------------------------------")
+    x = i + 1
+    y = m - i - 1
+    if x == n - i:
+        break
+    while x < n - i:
+        l_sj[x][y] = int_s
+        int_s += 1
+        x += 1
+    # show(l_sj)
+    # print("----------------------------------")
+    j1 = m - i - 1
+    if j1 == i:
+        break
+    while j1 > i:
+        l_sj[n - i - 1][j1 - 1] = int_s
+        int_s += 1
+        j1 -= 1
+    # show(l_sj)
+    # print("----------------------------------")
+    y1 = n - i - 2
+    if y1 == i:
+        break
+    while y1 > i:
+        l_sj[y1][i] = int_s
+        int_s += 1
+        y1 -= 1
+    # show(l_sj)
+    # print("----------------------------------")
+
+sel = input()
+l_s = trans(sel)
+print(l_sj[l_s[0]-1][l_s[1]-1])
